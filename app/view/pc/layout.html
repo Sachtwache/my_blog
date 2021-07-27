@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{title}}</title>
+    <meta name="keywords" content="前端开发">
+    <meta name="description" content="">
+    <link rel="stylesheet" href="/css/pc/layout.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/pc/pc_common.css">
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/swiper.min.css">
+</head>
+
+
+<body>
+    <div class="long">
+        <div class="header">
+            <ul class="meun">
+                <li class="">
+                    <a class="a" href="/">
+                        <span class="word">首页</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a class="a" href="/book">
+                        <span class="word">书籍</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a class="a" href="/blog">
+                        <span class="word">博客</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a class="a" href="/video">
+                        <span class="word">视频</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a class="a" href="/resource">
+                        <span class="word">资源</span>
+                    </a>
+                </li>
+            </ul>     
+        </div>
+    </div>
+    {% block content %} {% endblock %} {% block js %} {% endblock %}
+    <script src="/js/pc/jquery-2.1.1.min.js"></script>
+    <script src="/js/phone/bootstrap.min.js"></script>
+    <script src="/js/swiper.min.js"></script>
+    <script>
+        //移入移出
+        $(".user ").hover(function () {
+            $(".Code ").show();
+        }, function () {
+            $(".Code ").hide();
+        });
+        $(".codeUser ").hover(function () {
+            $(".CodeTeam ").show();
+        }, function () {
+            $(".CodeTeam ").hide();
+        });
+        //返回顶部
+        $(".toTop").click(function () {
+            $("html,body").animate({
+                "scrollTop": "0px"
+            }, 200)
+        })
+
+        //移入移出菜单
+        $(".sigin").mouseenter(function (e) {
+            $(".addShow ul").removeClass('hide');
+        }).mouseleave(function (e) {
+            $(".addShow ul").addClass("hide")
+        });
+
+
+
+
+        let path = "";
+        if (location.pathname.indexOf("/docs") > -1) {
+            path = "/book"
+        } else if (location.pathname.indexOf("/details") > -1) {
+            path = "/book"
+        } else if (location.pathname.indexOf("/blog") > -1) {
+            path = "/blog"
+        } else if (location.pathname.indexOf("/video") > -1) {
+            path = "/videos"
+        } else if (location.pathname.indexOf("/videosmenu") > -1) {
+            path = "/videosmenu"
+        } else {
+            path = location.pathname;
+        }
+
+        // let url = pathData[path];
+
+        console.log(path)
+        switch (path) {
+            case "/":
+                setLine(0);
+                break;
+            case "/book":
+                setLine(1);
+                break;
+            case "/blog":
+                setLine(2);
+                break;
+            case "/videos":
+                setLine(3);
+                break;
+            case "/resources":
+                setLine(4);
+                break;
+        }
+
+        function setLine(index) {
+            $(".meun li").eq(index).addClass("active");
+        }
+
+        var swiper = new Swiper('.swiper-container', {
+            autoplay: {
+                delay: 2000,//1秒切换一次
+            },
+            loop : true,
+            pagination: {
+                el: '.swiper-pagination',
+                dynamicBullets: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+    </script>
+</body>
+
+</html>
